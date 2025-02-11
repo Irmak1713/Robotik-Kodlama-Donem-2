@@ -1,39 +1,42 @@
-int led2 = 2; 
-int led3 = 3;
-int led4 = 4; 
-
-int pot = A0; 
-int potdeger; 
- 
+int ledler[] = {
+  4,
+  5,
+  6,
+  7
+};
+int led_sayisi = 4;
+int ldr_pin = A0;
+int deger = 0;
 void setup() {
-  
-  pinMode(led2, OUTPUT); 
-  pinMode(led3, OUTPUT); 
-  pinMode(led4, OUTPUT); 
-  pinMode(pot, INPUT); 
+  for (int i = 0; i < led_sayisi; i++) {
+    pinMode(ledler[i], OUTPUT);
+  }
 }
- 
 void loop() {
-  potdeger = analogRead(pot); 
- 
-  if (potdeger<400){
-
-    digitalWrite(led2, HIGH);
-    digitalWrite(led3, LOW);
-    digitalWrite(led4, LOW);
+  deger = analogRead(ldr_pin);
+  if (deger > 0 && deger <= 255) {
+    digitalWrite(ledler[0], HIGH);
+    digitalWrite(ledler[1], LOW);
+    digitalWrite(ledler[2], LOW);
+    digitalWrite(ledler[3], LOW);
   }
-  else if (potdeger<800){ 
-
-    digitalWrite(led2, HIGH);
-    digitalWrite(led3, HIGH);
-    digitalWrite(led4, LOW);
+  if (deger > 256 && deger <= 511) {
+    digitalWrite(ledler[0], HIGH);
+    digitalWrite(ledler[1], HIGH);
+    digitalWrite(ledler[2], LOW);
+    digitalWrite(ledler[3], LOW);
   }
-  else if (potdeger<1023){
-
-    digitalWrite(led2, HIGH);
-    digitalWrite(led3, HIGH);
-    digitalWrite(led4, HIGH);
+  if (deger > 512 && deger <= 767) {
+    digitalWrite(ledler[0], HIGH);
+    digitalWrite(ledler[1], HIGH);
+    digitalWrite(ledler[2], HIGH);
+    digitalWrite(ledler[3], LOW);
+  }
+  if (deger > 768 && deger <= 1023) {
+    digitalWrite(ledler[0], HIGH);
+    digitalWrite(ledler[1], HIGH);
+    digitalWrite(ledler[2], HIGH);
+    digitalWrite(ledler[3], HIGH);
   }
   delay(100);
- 
 }
